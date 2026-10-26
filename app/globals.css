@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body { @apply bg-cream text-espresso font-sans antialiased; overflow-x: hidden; }
+  h1, h2, h3, h4 { @apply font-display text-espresso; }
+  ::selection { background: #C5A46D; color: #3B2418; }
+  :focus-visible { outline: 2px solid #A47148; outline-offset: 3px; border-radius: 8px; }
+}
+
+@layer components {
+  .container-x { @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8; }
+  .section { @apply py-20 sm:py-24; }
+
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-medium tracking-wide transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-60; }
+  .btn-primary { @apply btn bg-coffee text-white shadow-soft hover:bg-espresso hover:shadow-lift hover:-translate-y-0.5; }
+  .btn-dark { @apply btn bg-espresso text-cream hover:bg-coffee; }
+  .btn-outline { @apply btn border border-coffee/30 text-coffee hover:border-coffee hover:bg-coffee hover:text-white; }
+  .btn-ghost-light { @apply btn border border-cream/40 text-cream hover:bg-cream hover:text-espresso; }
+  .btn-gold { @apply btn bg-gold text-espresso hover:bg-[#d4b57f] shadow-soft; }
+
+  .card { @apply rounded-3xl bg-white shadow-soft ring-1 ring-espresso/5; }
+  .eyebrow { @apply text-xs font-semibold uppercase tracking-[0.25em] text-caramel; }
+  .input { @apply w-full rounded-2xl border border-beige bg-cream/60 px-4 py-3 text-base text-espresso placeholder:text-coffee/40 transition focus:border-caramel focus:bg-white focus:outline-none focus:ring-4 focus:ring-gold/20; }
+  .label { @apply mb-2 block text-sm font-medium text-espresso; }
+  .chip { @apply inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm transition; }
+}
+
+/* Scroll reveal */
+.reveal { opacity: 0; transform: translateY(22px); transition: opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1); }
+.reveal.is-visible { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  * { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; }
+}
+
+/* Subtle paper grain on cream sections */
+.grain { position: relative; isolation: isolate; }
+.grain::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: .35;
+  background-image: radial-gradient(rgba(111,78,55,.08) 1px, transparent 1px);
+  background-size: 18px 18px;
+}
+
+/* Print rules for the QR poster */
+@media print {
+  @page { size: A5 portrait; margin: 0; }
+  body { background: #fff !important; }
+  .no-print { display: none !important; }
+  .print-only { display: block !important; }
+}
